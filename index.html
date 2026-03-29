@@ -6,9 +6,8 @@
 <title>Pro Visual Portfolio</title>
 
 <style>
-/* ===== 全局基础优化 (设计感基石) ===== */
 :root {
-  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body{
@@ -17,23 +16,22 @@ body{
   background:#0a0a0a;
   color:#fff;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased; /* 让字体更锐利 */
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ===== 通用产品模块 (调整圆角与呼吸感) ===== */
+/* ===== 通用产品模块 ===== */
 .product{
   padding:120px 8%;
-  border-radius:28px; /* 降低圆角，显得更严谨高级 */
+  border-radius:28px;
   margin:100px auto;
   width:85%;
   display:flex;
   flex-direction:column;
-  gap:40px; /* 增加组件间距 */
+  gap:40px;
   box-shadow: 0 40px 100px rgba(0,0,0,0.6);
   opacity:0;
   transform:translateY(40px);
-  transition:0.9s cubic-bezier(0.23, 1, 0.32, 1); /* 更平滑的曲线 */
+  transition:0.9s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .product.show{
@@ -41,24 +39,24 @@ body{
   transform:translateY(0);
 }
 
-/* ===== 视频排版优化 (核心修复) ===== */
+/* ===== 视频排版 (已移除所有视频阴影) ===== */
 video { 
   display: block;
   width:100%; 
   max-width:1000px; 
   border-radius:18px; 
   margin:0 auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  /* box-shadow 已移除，保持全站统一 */
 }
 
-/* 专门处理竖屏视频 (针对 Product 5 珠宝) */
+/* 竖屏视频适配 (Product 5) */
 .product video.portrait-video {
-  width: auto; /* 宽度随高度自动 */
-  max-height: 80vh; /* 限制垂直高度不超过屏幕的 80% */
-  object-fit: contain; /* 确保内容完整 */
+  width: auto;
+  max-height: 80vh;
+  object-fit: contain;
 }
 
-/* ===== 布局变体 (无视频布局优化) ===== */
+/* ===== 布局变体 ===== */
 .no-video-layout {
   flex-direction: row !important;
   align-items: center;
@@ -72,7 +70,7 @@ video {
   .no-video-layout { flex-direction: column !important; }
 }
 
-/* ===== 主题颜色库 (微调色调) ===== */
+/* ===== 主题颜色库 ===== */
 .theme1{background:#000;}
 .theme2{background:#fff; color:#111;}
 .theme3{background:linear-gradient(145deg,#120e0e,#1f1616);}
@@ -81,14 +79,8 @@ video {
 .theme6{background:#111; border:1px solid rgba(255,255,255,0.06);}
 .theme7{background: linear-gradient(135deg, #181528, #30254c); border: 1px solid rgba(180, 150, 255, 0.15);}
 
-/* ===== 核心视觉组件 - Viewer (设计感升级) ===== */
-.viewer{ 
-  display:flex; 
-  align-items:center; 
-  justify-content:center; 
-  gap:10px; 
-  position: relative; /* 为按钮浮动做准备 */
-}
+/* ===== 核心视觉组件 - Viewer ===== */
+.viewer{ display:flex; align-items:center; justify-content:center; gap:10px; position: relative; }
 
 .main-img{
   width:100%;
@@ -96,11 +88,10 @@ video {
   height:500px;
   object-fit:contain;
   border-radius:20px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.1);
   transition: 0.3s;
 }
 
-/* 浮动磨砂玻璃按钮设计 */
 .viewer button{
   position: absolute;
   top: 50%;
@@ -111,21 +102,18 @@ video {
   border-radius:50%;
   border:1px solid rgba(255,255,255,0.1);
   cursor:pointer;
-  background:rgba(255,255,255,0.05); /* 默认极低不透明度 */
+  background:rgba(255,255,255,0.05);
   color:#fff;
-  backdrop-filter: blur(12px); /* 磨砂玻璃 */
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition:0.3s ease;
   font-size: 16px;
-  opacity: 0.2; /* 默认几乎不可见 */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  opacity: 0; /* 默认隐藏，只有鼠标移入才显示 */
 }
 
-/* 鼠标移入 viewer 区域才显示按钮 */
-.viewer:hover button { opacity: 1; background:rgba(255,255,255,0.12); }
+.viewer:hover button { opacity: 1; }
 .viewer button:hover{ background:rgba(255,255,255,0.25); transform: translateY(-50%) scale(1.08); }
 
-/* 按钮位置 */
 .viewer button.prev-btn { left: 20px; }
 .viewer button.next-btn { right: 20px; }
 
@@ -134,57 +122,46 @@ video {
   color:#111; 
   background:rgba(0,0,0,0.03); 
   border-color: rgba(0,0,0,0.08); 
-  opacity: 0.3;
 }
-.theme2 .viewer:hover button, .theme5 .viewer:hover button { background:rgba(0,0,0,0.08); opacity: 1;}
+.theme2 .viewer:hover button, .theme5 .viewer:hover button { background:rgba(0,0,0,0.08); }
 
-/* ===== 缩略图 (优化间距与高亮) ===== */
+/* ===== 缩略图 ===== */
 .thumbs{ display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-top: 10px; }
 .thumbs img{
-  width:80px; /* 稍微缩小一点缩略图，让大图更突出 */
+  width:80px;
   height:54px;
   object-fit:cover;
   border-radius:8px;
   cursor:pointer;
-  opacity:0.3; /* 降低默认不透明度，强调对比 */
+  opacity:0.3;
   transition:0.3s cubic-bezier(0.23, 1, 0.32, 1);
   border: 1.5px solid transparent;
 }
 .thumbs img.active{ opacity:1; transform:scale(1.08); border:1.5px solid #fff; }
 .theme2 .thumbs img.active, .theme5 .thumbs img.active { border-color: #111; }
 
-/* ===== 排版与字体细节 (提升设计感) ===== */
+/* ===== 排版与字体细节 ===== */
 .hero{ height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
 .hero h1{ 
   font-size:62px; 
-  font-weight: 800; /* 加粗标题 */
-  letter-spacing:10px; /* 极宽间距，增加张力 */
+  font-weight: 800;
+  letter-spacing:10px;
   margin:0; 
-  text-transform: uppercase; /* 全部大写 */
+  text-transform: uppercase;
 }
-.hero p{ 
-  opacity:0.4; 
-  margin-top:15px; 
-  font-size: 16px;
-  font-weight: 300; 
-  letter-spacing: 4px;
-}
+.hero p{ opacity:0.4; margin-top:15px; font-size: 16px; letter-spacing: 4px; }
 
-.product h2{ 
-  font-size:30px; 
-  font-weight: 700;
-  letter-spacing:1px; 
-  margin-bottom:10px; 
-}
+.product h2{ font-size:30px; font-weight: 700; letter-spacing:1px; margin-bottom:10px; text-align: center;}
 .product p.desc {
   font-weight: 300;
   line-height: 1.8;
-  opacity: 0.7;
+  opacity: 0.6;
   max-width: 800px;
   margin: 0 auto 10px;
+  text-align: center;
 }
 
-.about{ padding:120px 0; text-align:center; opacity:0.3; font-weight: 300; font-size: 14px;}
+.about{ padding:120px 0; text-align:center; opacity:0.3; font-size: 14px;}
 </style>
 </head>
 
@@ -196,10 +173,8 @@ video {
 </div>
 
 <div class="product theme1">
-  <div style="text-align: center;">
-    <h2>Razer Huntsman V3 Pro｜质感光影 animation</h2>
-    <p class="desc">Key motion visual capturing the intricate lighting and material feedback of the keyboard.</p>
-  </div>
+  <h2>Razer Huntsman V3 Pro｜光影动画</h2>
+  <p class="desc">Key motion visual capturing the intricate lighting and material feedback.</p>
   <video autoplay muted loop playsinline><source src="sp/jianpan1.mp4"></video>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('a')">←</button>
@@ -215,10 +190,8 @@ video {
 </div>
 
 <div class="product theme2">
-  <div style="text-align: center;">
-    <h2>CG Model - Mobile Rendering</h2>
-    <p class="desc">Detailed CG rendering of modern mobile devices, focusing on reflections and product form.</p>
-  </div>
+  <h2>CG Model - Mobile Rendering</h2>
+  <p class="desc">Detailed CG rendering of modern mobile devices.</p>
   <video autoplay muted loop playsinline><source src="sp/3月29日(2).mp4"></video>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('b')">←</button>
@@ -234,10 +207,8 @@ video {
 </div>
 
 <div class="product theme3">
-  <div style="text-align: center;">
-    <h2>Lipstick - High-End Render Set</h2>
-    <p class="desc">Studio rendering of cosmetics emphasizing smooth surfaces and luxury tones.</p>
-  </div>
+  <h2>Lipstick - Render Set</h2>
+  <p class="desc">Studio rendering of cosmetics emphasizing smooth surfaces.</p>
   <video autoplay muted loop playsinline><source src="sp/3月29日.mp4"></video>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('c')">←</button>
@@ -254,10 +225,8 @@ video {
 </div>
 
 <div class="product theme4">
-  <div style="text-align: center;">
-    <h2>CT5 Automotive Visualization</h2>
-    <p class="desc">Dynamic automotive lighting study and dramatic angle renders.</p>
-  </div>
+  <h2>CT5 Automotive Visualization</h2>
+  <p class="desc">Dynamic automotive lighting study and dramatic angle renders.</p>
   <video autoplay muted loop playsinline><source src="sp/3月29日(1).mp4"></video>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('d')">←</button>
@@ -277,10 +246,8 @@ video {
 </div>
 
 <div class="product theme5">
-  <div style="text-align: center;">
-    <h2>Jewelry & Cosmetic Showcase</h2>
-    <p class="desc">Portrait motion graphics highlighting luxury goods details.</p>
-  </div>
+  <h2>Jewelry & Cosmetic Showcase</h2>
+  <p class="desc">Portrait motion graphics highlighting luxury goods details.</p>
   <video autoplay muted loop playsinline class="portrait-video"><source src="sp/3月29日(4).mp4"></video>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('e')">←</button>
@@ -295,10 +262,10 @@ video {
 
 <div class="product theme6 no-video-layout">
   <div class="info-side">
-    <div style="border-left: 3px solid rgba(255,255,255,0.4); padding-left: 25px; margin-left: 5px;">
-      <p style="opacity: 0.3; margin: 0; font-size: 13px; letter-spacing: 2px; font-weight: 300;">STILL LIFE</p>
-      <h2 style="font-size: 34px; margin: 10px 0;">Studio Renders</h2>
-      <p class="desc" style="max-width: none; margin: 15px 0; text-align: left;">探索不同材质在影棚灯光下的极致表现。包含金属、玻璃、液体以及电子产品的细节捕捉。</p>
+    <div style="border-left: 3px solid rgba(255,255,255,0.4); padding-left: 25px;">
+      <p style="opacity: 0.3; margin: 0; font-size: 13px; letter-spacing: 2px;">STILL LIFE</p>
+      <h2 style="font-size: 34px; margin: 10px 0; text-align: left;">Studio Renders</h2>
+      <p style="opacity:0.6; line-height:1.8; margin-top:15px;">探索不同材质在影棚灯光下的极致表现。</p>
     </div>
   </div>
   <div class="viewer-side">
@@ -319,11 +286,8 @@ video {
 </div>
 
 <div class="product theme7">
-  <div style="text-align: center;">
-    <p style="color: rgba(180,150,255,0.8); letter-spacing: 4px; font-weight: 400; font-size: 12px; text-transform: uppercase; margin-bottom: 5px;">STYLIZED ART LAB</p>
-    <h2 style="font-size: 38px;">三渲二风格化尝试</h2>
-    <p class="desc">将3D建模的严谨与2D手绘的灵动结合，探索非真实感渲染（NPR）的无限可能。</p>
-  </div>
+  <h2>三渲二风格化尝试</h2>
+  <p class="desc">将3D建模的严谨与2D手绘的灵动结合。</p>
   <div class="viewer">
     <button class="prev-btn" onclick="prevImg('g')">←</button>
     <img id="g" class="main-img" src="qita1/2CI.jpg">
@@ -340,11 +304,9 @@ video {
 <div class="about">
   <h2>CONTACT ME</h2>
   <p>Visual Design / 3D Art / Motion Graphics</p>
-  <p style="margin-top: 15px; font-size: 10px;">© Portfolio System 2026</p>
 </div>
 
 <script>
-// 全量图片列表数据 (保持原样，无需修改)
 const imgList = {
   a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
   b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
@@ -355,19 +317,11 @@ const imgList = {
   g:["qita1/2CI.jpg","qita1/国画2.0.jpg","qita1/无标题.jpg","qita1/电脑科幻场景.jpg"]
 };
 
-// 索引配置 (d:4 是为了匹配 CT5 默认展示的 ct5光1.jpg)
 const indexMap = {a:0, b:0, c:0, d:4, e:0, f:0, g:0};
 
-// 设置当前图片的核心函数 (修正：增加 active 状态自动同步的大图逻辑)
 function setImg(id, el, index){
   const mainImg = document.getElementById(id);
-  mainImg.style.opacity = '0.7'; // 简单的切换过渡动效
-  
-  setTimeout(() => {
-    mainImg.src = el.src;
-    mainImg.style.opacity = '1';
-  }, 100);
-
+  mainImg.src = el.src;
   indexMap[id] = index;
   const parent = el.parentElement;
   parent.querySelectorAll("img").forEach(i => i.classList.remove("active"));
@@ -386,18 +340,10 @@ function prevImg(id){
   updateViewerState(id);
 }
 
-// 统一更新 UI 状态的函数 (修正：确保点击前后箭头时缩略图也被高亮)
 function updateViewerState(id){
   const newSrc = imgList[id][indexMap[id]];
   const mainImg = document.getElementById(id);
-  
-  mainImg.style.opacity = '0.7';
-  setTimeout(() => {
-    mainImg.src = newSrc;
-    mainImg.style.opacity = '1';
-  }, 100);
-  
-  // 同步缩略图状态
+  mainImg.src = newSrc;
   const productDiv = mainImg.closest('.product');
   const thumbs = productDiv.querySelectorAll('.thumbs img');
   thumbs.forEach((img, i) => {
@@ -406,15 +352,12 @@ function updateViewerState(id){
   });
 }
 
-// 滚动显示 (修正：更好的触发体验)
 const items = document.querySelectorAll('.product');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
+    if(entry.isIntersecting) entry.target.classList.add('show');
   });
-}, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+}, { threshold: 0.15 });
 
 items.forEach(item => observer.observe(item));
 </script>
