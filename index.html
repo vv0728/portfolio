@@ -42,7 +42,7 @@ body{
   flex-direction:column;
   gap:25px;
 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 
   opacity:0;
   transform:translateY(40px);
@@ -56,11 +56,12 @@ body{
 
 /* ===== 不同产品主题色 ===== */
 .theme1{
-  background: linear-gradient(145deg, #111, #1a1a1a);
+  background: #000; /* 纯黑 */
 }
 
 .theme2{
-  background: linear-gradient(145deg, #10131a, #1b2230);
+  background: #fff; /* 纯白 */
+  color:#111;
 }
 
 .theme3{
@@ -114,7 +115,12 @@ body{
   transform:scale(1.05);
 }
 
-/* ===== About ===== */
+/* 特殊白色主题缩略图文字颜色 */
+.theme2 .thumbs img{
+  border:2px solid #ddd;
+}
+
+/* About */
 .about{
   padding:140px 8%;
   text-align:center;
