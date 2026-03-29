@@ -2,29 +2,46 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Portfolio System</title>
+<title>Visual Portfolio System</title>
 
 <style>
 body{
   margin:0;
-  font-family: -apple-system, Arial;
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
   background:#0a0a0a;
   color:#fff;
+  overflow-x: hidden;
 }
-/* ===== 产品 6 专用：无视频排版 (左右布局) ===== */
+
+/* ===== 通用产品模块 ===== */
+.product{
+  padding:120px 8%;
+  border-radius:40px;
+  margin:100px auto;
+  width:85%;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.product.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== 布局变体 ===== */
 .no-video-layout {
-  display: flex;
-  flex-direction: row !important; /* 改为横向 */
-  align-items: stretch;
-  gap: 40px;
-  padding: 60px 5%;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 50px;
 }
 
 .no-video-layout .info-side {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   text-align: left;
 }
 
@@ -35,166 +52,93 @@ body{
   gap: 20px;
 }
 
-/* 适配手机端 */
-@media (max-width: 900px) {
-  .no-video-layout {
-    flex-direction: column !important;
-  }
-}
-/* ===== HERO ===== */
-.hero{
-  height:90vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
+@media (max-width: 1000px) {
+  .no-video-layout { flex-direction: column !important; }
 }
 
-.hero h1{
-  font-size:52px;
-  letter-spacing:4px;
-}
-
-.hero p{
-  opacity:0.6;
-}
-
-/* ===== 产品模块 ===== */
-.product{
-  padding:120px 8%;
-  border-radius:30px;
-  margin:80px auto;
-  width:85%;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.8s;
-}
-
-.product.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ===== 主题 ===== */
+/* ===== 主题颜色 ===== */
 .theme1{background:#000;}
-.theme2{background:#fff;color:#111;}
+.theme2{background:#fff; color:#111;}
 .theme3{background:linear-gradient(145deg,#151010,#241818);}
-  .theme4{
-  background: linear-gradient(145deg, #0b0b0f, #1a1a22);
-  border:1px solid rgba(255,255,255,0.05);
-}
-
-.theme5{
-  background: linear-gradient(145deg, #f7f7f7, #dcdcdc);
-  color:#111;
-}
-
-.theme5 .viewer button{
-  color:#111;
-  background:rgba(0,0,0,0.08);
-}
-
-.theme6{
-  background:#111;
-  border:1px solid rgba(255,255,255,0.08);
-}
-
+.theme4{background: linear-gradient(145deg, #0b0b0f, #1a1a22); border:1px solid rgba(255,255,255,0.05);}
+.theme5{background: linear-gradient(145deg, #f7f7f7, #dcdcdc); color:#111;}
+.theme6{background:#111; border:1px solid rgba(255,255,255,0.08);}
+/* 产品 7 风格化主题：淡紫渐变 */
 .theme7{
-  background: linear-gradient(135deg, #120b1f, #1b1440);
+  background: linear-gradient(135deg, #1d1a2f, #3a2d5a);
+  border: 1px solid rgba(180, 150, 255, 0.2);
 }
 
-/* ===== 标题 ===== */
-.product h2{
-  font-size:26px;
-  letter-spacing:2px;
-  margin:0;
-}
-
-/* ===== 统一视觉（关键修复） ===== */
+/* ===== 核心视觉组件 ===== */
 .viewer{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:20px;
+  position: relative;
+}
+
+.main-img{
+  width:100%;
+  max-width:850px;
+  height:550px;
+  object-fit:contain;
+  border-radius:24px;
+  background: rgba(0,0,0,0.2);
+  transition: 0.5s;
 }
 
 .viewer button{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-
+  width:50px;
+  height:50px;
+  border-radius:50%;
   border:none;
   cursor:pointer;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:18px;
-
-  background:rgba(120,120,120,0.25);
-  color:#111;
-
-  backdrop-filter: blur(6px);
-  transition:0.3s;
-}
-
-.viewer button:hover{
-  transform:scale(1.05);
-  background:rgba(120,120,120,0.4);
-}
-
-/* 黑色主题自动反转 */
-.theme1 .viewer button,
-.theme3 .viewer button{
+  background:rgba(255,255,255,0.1);
   color:#fff;
-  background:rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  transition:0.3s;
+  font-size: 20px;
 }
-/* 主图（解决竖图爆炸） */
-.main-img{
-  width:100%;
-  max-width:800px;
-  height:500px;
-  object-fit:contain;
-  border-radius:18px;
-  background:#111;
-}
+
+.viewer button:hover{ background:rgba(255,255,255,0.25); transform: scale(1.1); }
+
+.theme2 .viewer button, .theme5 .viewer button { color:#000; background:rgba(0,0,0,0.05); }
 
 /* ===== 缩略图 ===== */
 .thumbs{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:10px;
+  gap:12px;
 }
 
 .thumbs img{
-  width:90px;
-  height:60px;
+  width:100px;
+  height:65px;
   object-fit:cover;
-  border-radius:8px;
+  border-radius:10px;
   cursor:pointer;
-  opacity:0.5;
+  opacity:0.4;
   transition:0.3s;
+  border: 2px solid transparent;
 }
 
 .thumbs img.active{
   opacity:1;
-  transform:scale(1.15);
+  transform:scale(1.1);
   border:2px solid #fff;
 }
 
-/* ABOUT */
-.about{
-  padding:140px 8%;
-  text-align:center;
-  opacity:0.6;
-}
+.theme2 .thumbs img.active, .theme5 .thumbs img.active { border-color: #000; }
+
+/* ===== 文本样式 ===== */
+.hero{ height:80vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+.hero h1{ font-size:64px; letter-spacing:6px; margin-bottom:10px; }
+.hero p{ opacity:0.5; font-size:18px; }
+
+.product h2{ font-size:28px; letter-spacing:2px; margin-bottom:10px; }
+.about{ padding:150px 0; text-align:center; opacity:0.4; font-size:14px; }
 </style>
 </head>
 
@@ -202,77 +146,43 @@ body{
 
 <div class="hero">
   <h1>VISUAL PORTFOLIO</h1>
-  <p>Product / Motion / 3D</p>
+  <p>Product Design / 3D Animation / Stylized Art</p>
 </div>
 
-<!-- ================= 产品1 ================= -->
 <div class="product theme1">
-  <h2>Razer Huntsman V3 Pro｜质感光影动画</h2>
-
-  <video autoplay muted loop playsinline>
-    <source src="sp/jianpan1.mp4">
-  </video>
-
+  <h2>Razer Huntsman V3 Pro｜质感光影</h2>
+  <video autoplay muted loop playsinline><source src="sp/jianpan1.mp4"></video>
   <div class="viewer">
     <button onclick="prevImg('a')">←</button>
     <img id="a" class="main-img" src="jianpan1/22.jpg">
     <button onclick="nextImg('a')">→</button>
   </div>
-
   <div class="thumbs">
-    <img src="jianpan1/22.jpg" onclick="setImg('a',this,0)">
+    <img src="jianpan1/22.jpg" class="active" onclick="setImg('a',this,0)">
     <img src="jianpan1/33.jpg" onclick="setImg('a',this,1)">
     <img src="jianpan1/正1.jpg" onclick="setImg('a',this,2)">
     <img src="jianpan1/特1.jpg" onclick="setImg('a',this,3)">
   </div>
 </div>
 
-<!-- ================= 产品2 ================= -->
 <div class="product theme2">
-  <h2>PRODUCT B - CG Model</h2>
-
-  <video autoplay muted loop playsinline>
-    <source src="sp/3月29日(2).mp4">
-  </video>
-
+  <h2>CG Mobile Model Rendering</h2>
+  <video autoplay muted loop playsinline><source src="sp/3月29日(2).mp4"></video>
   <div class="viewer">
     <button onclick="prevImg('b')">←</button>
     <img id="b" class="main-img" src="shouji1/0202.jpg">
     <button onclick="nextImg('b')">→</button>
   </div>
-
   <div class="thumbs">
-    <img src="shouji1/0202.jpg" onclick="setImg('b',this,0)">
+    <img src="shouji1/0202.jpg" class="active" onclick="setImg('b',this,0)">
     <img src="shouji1/2-1.jpg" onclick="setImg('b',this,1)">
     <img src="shouji1/侧43.jpg" onclick="setImg('b',this,2)">
     <img src="shouji1/Untitled.jpg" onclick="setImg('b',this,3)">
   </div>
 </div>
 
-<!-- ================= 产品3 ================= -->
-<div class="product theme3">
-  <h2>PRODUCT C - Render Set</h2>
-
-  <video autoplay muted loop playsinline>
-    <source src="sp/3月29日.mp4">
-  </video>
-
-  <div class="viewer">
-    <button onclick="prevImg('c')">←</button>
-    <img id="c" class="main-img" src="kouhong1/001d.jpg">
-    <button onclick="nextImg('c')">→</button>
-  </div>
-
-  <div class="thumbs">
-    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
-    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
-    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
-    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
-    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
-  </div>
-</div>
 <div class="product theme4">
-  <h2>CT5 - Render Series</h2>
+  <h2>CT5 - Automotive Visualization</h2>
   <video autoplay muted loop playsinline><source src="sp/3月29日(1).mp4"></video>
   <div class="viewer">
     <button onclick="prevImg('d')">←</button>
@@ -284,44 +194,29 @@ body{
     <img src="ct5d.jpg" onclick="setImg('d',this,1)">
     <img src="ct5d侧.jpg" onclick="setImg('d',this,2)">
     <img src="ct5d侧正.jpg" onclick="setImg('d',this,3)">
-    <img src="ct5光1.jpg" onclick="setImg('d',this,4)">
+    <img src="ct5光1.jpg" class="active" onclick="setImg('d',this,4)">
     <img src="ct5光2.jpg" onclick="setImg('d',this,5)">
     <img src="ct5正.jpg" onclick="setImg('d',this,6)">
     <img src="ct5轮.jpg" onclick="setImg('d',this,7)">
   </div>
 </div>
 
-<div class="product theme5">
-  <h2>PRODUCT E - Cosmetic Set</h2>
-  <video autoplay muted loop playsinline><source src="sp/3月29日(4).mp4"></video>
-  <div class="viewer">
-    <button onclick="prevImg('e')">←</button>
-    <img id="e" class="main-img" src="qita1/Untitled.jpg">
-    <button onclick="nextImg('e')">→</button>
-  </div>
-  <div class="thumbs">
-    <img src="qita1/0202020d.jpg" onclick="setImg('e',this,0)">
-    <img src="qita1/zhubao1.jpg" onclick="setImg('e',this,1)">
-  </div>
-</div>
-
 <div class="product theme6 no-video-layout">
   <div class="info-side">
     <div style="border-left: 4px solid #fff; padding-left: 20px;">
-      <p style="opacity: 0.5; margin: 0;">GALLERY</p>
-      <h2 style="font-size: 32px; margin: 10px 0;">PRODUCT F</h2>
-      <p>这里是纯图片展示区域，采用了左右对分的排版，适合展示静态渲染图组。</p>
+      <p style="opacity: 0.5; margin: 0;">STILL LIFE</p>
+      <h2 style="font-size: 32px; margin: 10px 0;">Studio Renders</h2>
+      <p style="opacity:0.7; line-height:1.6;">探索不同材质在影棚灯光下的极致表现。包含金属、玻璃、液体以及电子产品的细节捕捉。</p>
     </div>
   </div>
-
   <div class="viewer-side">
     <div class="viewer">
       <button onclick="prevImg('f')">←</button>
-      <img id="f" class="main-img" src="kouhong1/001d.jpg" style="height: 400px;">
+      <img id="f" class="main-img" src="qita1/暗01.jpg" style="height: 450px;">
       <button onclick="nextImg('f')">→</button>
     </div>
     <div class="thumbs">
-      <img src="qita1/暗01.jpg" onclick="setImg('f',this,0)">
+      <img src="qita1/暗01.jpg" class="active" onclick="setImg('f',this,0)">
       <img src="qita1/暗2.1.jpg" onclick="setImg('f',this,1)">
       <img src="qita1/沐浴露.jpg" onclick="setImg('f',this,2)">
       <img src="qita1/苹果17.jpg" onclick="setImg('f',this,3)">
@@ -331,29 +226,50 @@ body{
   </div>
 </div>
 
+<div class="product theme7">
+  <div style="text-align: center; margin-bottom: 30px;">
+    <p style="color: #b496ff; letter-spacing: 4px; font-weight: bold;">STYLIZED ART</p>
+    <h2 style="font-size: 36px;">三渲二风格化尝试</h2>
+    <p style="opacity: 0.6; max-width: 600px; margin: 10px auto;">将3D建模的严谨与2D手绘的灵动结合，探索非真实感渲染（NPR）的无限可能。</p>
+  </div>
+  
+  <div class="viewer">
+    <button onclick="prevImg('g')">←</button>
+    <img id="g" class="main-img" src="qita1/相机01.jpg"> <button onclick="nextImg('g')">→</button>
+  </div>
+  
+  <div class="thumbs">
+    <img src="qita1/相机01.jpg" class="active" onclick="setImg('g',this,0)">
+    <img src="qita1/苹果17.jpg" onclick="setImg('g',this,1)">
+    <img src="qita1/暗01.jpg" onclick="setImg('g',this,2)">
+  </div>
+</div>
+
 <div class="about">
-  <h2>ABOUT</h2>
-  <p>Visual Design / 3D / Motion</p>
+  <h2>CONTACT ME</h2>
+  <p>Visual Design / 3D Art / Motion Graphics</p>
+  <p style="margin-top:20px; font-size:12px;">© 2026 Portfolio System</p>
 </div>
 
 <script>
+// 1. 数据配置 (修复了 f 组的逗号错误)
 const imgList = {
   a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
   b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
   c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"],
   d:["ct5.jpg","ct5d.jpg","ct5d侧.jpg","ct5d侧正.jpg","ct5光1.jpg","ct5光2.jpg","ct5正.jpg","ct5轮.jpg"],
   e:["qita1/0202020d.jpg","qita1/zhubao1.jpg"],
-  f:["qita1/暗01.jpg","qita1/暗2.1.jpg","qita1/沐浴露.jpg","qita1/苹果17.jpg","qita1/相机01.jpg""qita1/xiangshuid.jpg"]
+  f:["qita1/暗01.jpg","qita1/暗2.1.jpg","qita1/沐浴露.jpg","qita1/苹果17.jpg","qita1/相机01.jpg","qita1/xiangshuid.jpg"],
+  g:["qita1/相机01.jpg","qita1/苹果17.jpg","qita1/暗01.jpg"] // 产品 7 的图片列表
 };
 
-// 2. 初始化所有产品的索引计数器
-const indexMap = {a:0, b:0, c:0, d:0, e:0, f:0};
+// 2. 索引管理
+const indexMap = {a:0, b:0, c:0, d:4, e:0, f:0, g:0};
 
 function setImg(id, el, index){
   document.getElementById(id).src = el.src;
   indexMap[id] = index;
 
-  // 激活缩略图状态
   const parent = el.parentElement;
   parent.querySelectorAll("img").forEach(i => i.classList.remove("active"));
   el.classList.add("active");
@@ -375,7 +291,7 @@ function update(id){
   const newSrc = imgList[id][indexMap[id]];
   document.getElementById(id).src = newSrc;
   
-  // 同步缩略图的 active 状态
+  // 自动同步底部缩略图状态
   const productDiv = document.getElementById(id).closest('.product');
   const thumbs = productDiv.querySelectorAll('.thumbs img');
   thumbs.forEach((img, i) => {
@@ -384,15 +300,17 @@ function update(id){
   });
 }
 
-/* 滚动显示动画 */
+// 3. 滚动进入动画
 const items = document.querySelectorAll('.product');
-const observer = new IntersectionObserver(e => {
-  e.forEach(i => {
-    if(i.isIntersecting) i.target.classList.add('show');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
   });
-}, {threshold: 0.1});
+}, { threshold: 0.1 });
 
-items.forEach(i => observer.observe(i));
+items.forEach(item => observer.observe(item));
 </script>
 
 </body>
