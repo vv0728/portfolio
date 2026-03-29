@@ -1,375 +1,731 @@
 <!DOCTYPE html>
+
 <html lang="zh">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pro Visual Portfolio</title>
 
+
+
 <style>
+
 :root {
+
   --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --bg-dark: #0a0a0a;
-  --bg-light: #f5f5f7; /* 更加高级的象牙白 */
-  --accent-color: #ffffff;
+
 }
 
-/* 全局平滑滚动 */
-html { scroll-behavior: smooth; }
 
-body {
-  margin: 0;
+
+body{
+
+  margin:0;
+
   font-family: var(--font-stack);
-  background: var(--bg-dark);
-  color: #fff;
+
+  background:#0a0a0a;
+
+  color:#fff;
+
   overflow-x: hidden;
+
   -webkit-font-smoothing: antialiased;
+
 }
 
-/* ===== 1. 页头电影感动画 (Hero Animation) ===== */
-.hero { 
-  height: 80vh; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: column; 
-  text-align: center; 
-  padding: 0 20px;
-  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 70%); /* 增加背景层次感 */
+
+
+/* ===== 通用产品模块 ===== */
+
+.product{
+
+  padding:120px 8%;
+
+  border-radius:28px;
+
+  margin:100px auto;
+
+  width:85%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:40px;
+
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+
+  opacity:0;
+
+  transform:translateY(40px);
+
+  transition:0.9s cubic-bezier(0.23, 1, 0.32, 1);
+
 }
 
-.hero h1 { 
-  font-size: 62px; 
-  font-weight: 800; 
-  letter-spacing: 12px; 
-  margin: 0; 
-  text-transform: uppercase;
-  animation: heroReveal 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  opacity: 0;
+
+
+.product.show{
+
+  opacity:1;
+
+  transform:translateY(0);
+
 }
 
-.hero p { 
-  opacity: 0; 
-  margin-top: 20px; 
-  font-size: 14px; 
-  letter-spacing: 4px; 
-  line-height: 1.8;
-  animation: pReveal 2s cubic-bezier(0.19, 1, 0.22, 1) 0.5s forwards;
-}
 
-@keyframes heroReveal {
-  0% { opacity: 0; transform: translateY(30px) scale(0.98); letter-spacing: 20px; filter: blur(10px); }
-  100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 12px; filter: blur(0); }
-}
 
-@keyframes pReveal {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 0.4; transform: translateY(0); }
-}
+/* ===== 视频排版 (已移除所有视频阴影) ===== */
 
-/* ===== 2. 产品模块与深色微调 ===== */
-.product {
-  padding: 120px 8%;
-  border-radius: 32px;
-  margin: 100px auto;
-  width: 88%;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-  box-sizing: border-box;
-}
-
-.product.show { opacity: 1; transform: translateY(0); }
-
-/* 主题颜色优化 */
-.theme1 { background: #000; border: 1px solid rgba(255,255,255,0.05); }
-.theme2 { background: var(--bg-light); color: #111; }
-.theme3 { background: linear-gradient(145deg, #151111, #0a0a0a); }
-.theme4 { background: #0c0c10; border: 1px solid rgba(255,255,255,0.03); }
-.theme5 { background: #e8e8e8; color: #111; } /* 稍暗的亮色 */
-.theme6 { background: #111; border: 1px solid rgba(255,255,255,0.05); }
-.theme7 { background: linear-gradient(135deg, #14121f, #0a0a0a); }
-
-/* ===== 3. 视觉交互升级 ===== */
 video { 
+
   display: block;
-  width: 100%; 
-  max-width: 1000px; 
-  border-radius: 12px; 
-  margin: 0 auto;
-  transition: transform 0.6s ease;
+
+  width:100%; 
+
+  max-width:1000px; 
+
+  border-radius:18px; 
+
+  margin:0 auto;
+
+  /* box-shadow 已移除，保持全站统一 */
+
 }
 
-.main-img {
-  width: 100%;
-  max-width: 850px;
-  height: 500px;
+
+
+/* 竖屏视频适配 (Product 5) */
+
+.product video.portrait-video {
+
+  width: auto;
+
+  max-height: 80vh;
+
   object-fit: contain;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.05);
-  transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+
 }
 
-.viewer:hover .main-img { transform: scale(1.01); }
 
-.viewer button {
+
+/* ===== 布局变体 ===== */
+
+.no-video-layout {
+
+  flex-direction: row !important;
+
+  align-items: center;
+
+  gap: 60px;
+
+}
+
+
+
+.no-video-layout .info-side { flex: 1; text-align: left; }
+
+.no-video-layout .viewer-side { flex: 1.8; display: flex; flex-direction: column; gap: 20px; }
+
+
+
+@media (max-width: 1100px) {
+
+  .no-video-layout { flex-direction: column !important; }
+
+}
+
+
+
+/* ===== 主题颜色库 ===== */
+
+.theme1{background:#000;}
+
+.theme2{background:#fff; color:#111;}
+
+.theme3{background:linear-gradient(145deg,#120e0e,#1f1616);}
+
+.theme4{background: linear-gradient(145deg, #09090c, #16161c); border:1px solid rgba(255,255,255,0.03);}
+
+.theme5{background: linear-gradient(145deg, #f0f0f0, #d5d5d5); color:#111;}
+
+.theme6{background:#111; border:1px solid rgba(255,255,255,0.06);}
+
+.theme7{background: linear-gradient(135deg, #181528, #30254c); border: 1px solid rgba(180, 150, 255, 0.15);}
+
+
+
+/* ===== 核心视觉组件 - Viewer ===== */
+
+.viewer{ display:flex; align-items:center; justify-content:center; gap:10px; position: relative; }
+
+
+
+.main-img{
+
+  width:100%;
+
+  max-width:850px;
+
+  height:500px;
+
+  object-fit:contain;
+
+  border-radius:20px;
+
+  background: rgba(0,0,0,0.1);
+
+  transition: 0.3s;
+
+}
+
+
+
+.viewer button{
+
   position: absolute;
+
   top: 50%;
+
   transform: translateY(-50%);
+
   z-index: 10;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  transition: all 0.4s ease;
-  opacity: 0;
+
+  width:50px;
+
+  height:50px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(255,255,255,0.1);
+
+  cursor:pointer;
+
+  background:rgba(255,255,255,0.05);
+
+  color:#fff;
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:0.3s ease;
+
+  font-size: 16px;
+
+  opacity: 0; /* 默认隐藏，只有鼠标移入才显示 */
+
 }
 
-@media (min-width: 1025px) { .viewer:hover button { opacity: 1; } }
 
-.viewer button:hover { background: rgba(255,255,255,0.25); transform: translateY(-50%) scale(1.1); }
+
+.viewer:hover button { opacity: 1; }
+
+.viewer button:hover{ background:rgba(255,255,255,0.25); transform: translateY(-50%) scale(1.08); }
+
+
+
 .viewer button.prev-btn { left: 20px; }
+
 .viewer button.next-btn { right: 20px; }
 
-/* 缩略图增强 */
-.thumbs img {
-  width: 80px;
-  height: 52px;
-  object-fit: cover;
-  border-radius: 4px;
-  cursor: pointer;
-  opacity: 0.2;
-  transition: 0.4s;
-  filter: grayscale(1);
-}
-.thumbs img.active { opacity: 1; border: 1px solid #fff; filter: grayscale(0); transform: translateY(-3px); }
 
-/* ===== 移动端专项适配 ===== */
-@media (max-width: 768px) {
-  .hero h1 { font-size: 36px; letter-spacing: 6px; }
-  .product { width: 95%; margin: 30px auto; padding: 50px 20px; border-radius: 20px; }
-  .main-img { height: 320px; }
-  .viewer button { opacity: 0.7; width: 44px; height: 44px; background: rgba(0,0,0,0.2); }
-  .no-video-layout { flex-direction: column !important; }
-  .no-video-layout .info-side { text-align: center; }
-  .no-video-layout .info-side div { border: none !important; padding: 0 !important; }
+
+/* 亮色主题按钮适配 */
+
+.theme2 .viewer button, .theme5 .viewer button { 
+
+  color:#111; 
+
+  background:rgba(0,0,0,0.03); 
+
+  border-color: rgba(0,0,0,0.08); 
+
 }
 
-.about { padding: 120px 0; text-align: center; opacity: 0.2; font-size: 11px; letter-spacing: 2px; }
+.theme2 .viewer:hover button, .theme5 .viewer:hover button { background:rgba(0,0,0,0.08); }
+
+
+
+/* ===== 缩略图 ===== */
+
+.thumbs{ display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-top: 10px; }
+
+.thumbs img{
+
+  width:80px;
+
+  height:54px;
+
+  object-fit:cover;
+
+  border-radius:8px;
+
+  cursor:pointer;
+
+  opacity:0.3;
+
+  transition:0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+  border: 1.5px solid transparent;
+
+}
+
+.thumbs img.active{ opacity:1; transform:scale(1.08); border:1.5px solid #fff; }
+
+.theme2 .thumbs img.active, .theme5 .thumbs img.active { border-color: #111; }
+
+
+
+/* ===== 排版与字体细节 ===== */
+
+.hero{ height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+
+.hero h1{ 
+
+  font-size:62px; 
+
+  font-weight: 800;
+
+  letter-spacing:10px;
+
+  margin:0; 
+
+  text-transform: uppercase;
+
+}
+
+.hero p{ opacity:0.4; margin-top:15px; font-size: 16px; letter-spacing: 4px; }
+
+
+
+.product h2{ font-size:30px; font-weight: 700; letter-spacing:1px; margin-bottom:10px; text-align: center;}
+
+.product p.desc {
+
+  font-weight: 300;
+
+  line-height: 1.8;
+
+  opacity: 0.6;
+
+  max-width: 800px;
+
+  margin: 0 auto 10px;
+
+  text-align: center;
+
+}
+
+
+
+.about{ padding:120px 0; text-align:center; opacity:0.3; font-size: 14px;}
+
 </style>
+
 </head>
+
+
 
 <body>
 
+
+
 <div class="hero">
+
   <h1>VISUAL PORTFOLIO</h1>
-  <p>光影重构・质感还原 / LIGHT REIMAGINED · TEXTURE RESTORED</p>
+
+  <p>光影重构・质感还原 / Light Reimagined · Texture Restored</p>
+
 </div>
+
+
 
 <div class="product theme1">
-  <h2 style="text-align:center;">Razer Keyboard｜材质光影展示</h2>
-  <p class="desc">光影重构 · 质感还原 / Light Reimagined · Texture Restored</p>
+
+  <h2>Razer Keyboard｜材质光影展示</h2>
+
+  <p class="desc">光影重构・质感还原 / Light Reimagined · Texture Restored .</p>
+
   <video autoplay muted loop playsinline><source src="sp/jianpan1.mp4"></video>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('a')">←</button>
+
     <img id="a" class="main-img" src="jianpan1/22.jpg">
+
     <button class="next-btn" onclick="nextImg('a')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="jianpan1/22.jpg" class="active" onclick="setImg('a',this,0)">
+
     <img src="jianpan1/33.jpg" onclick="setImg('a',this,1)">
+
     <img src="jianpan1/正1.jpg" onclick="setImg('a',this,2)">
+
     <img src="jianpan1/特1.jpg" onclick="setImg('a',this,3)">
+
   </div>
+
 </div>
+
+
 
 <div class="product theme2">
-  <h2 style="text-align:center;">小米 17 Ultra | 写实质感渲染</h2>
-  <p class="desc">光影凝萃 · 旗舰质感 / Light & Texture · Flagship Elegance</p>
+
+  <h2>小米 17 Ultra 墨绿色款 | 写实质感渲染</h2>
+
+  <p class="desc">光影凝萃・旗舰质感 / Light & Texture · Flagship Elegance.</p>
+
   <video autoplay muted loop playsinline><source src="sp/3月29日(2).mp4"></video>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('b')">←</button>
+
     <img id="b" class="main-img" src="shouji1/0202.jpg">
+
     <button class="next-btn" onclick="nextImg('b')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="shouji1/0202.jpg" class="active" onclick="setImg('b',this,0)">
+
     <img src="shouji1/2-1.jpg" onclick="setImg('b',this,1)">
+
     <img src="shouji1/侧43.jpg" onclick="setImg('b',this,2)">
+
     <img src="shouji1/Untitled.jpg" onclick="setImg('b',this,3)">
+
   </div>
+
 </div>
+
+
 
 <div class="product theme3">
-  <h2 style="text-align:center;">Chanel No.31 Lipstick / 高级材质渲染</h2>
-  <p class="desc">质感重构 · 奢雅光影 / Texture Reimagined · Luxury Elegance</p>
+
+  <h2>Chanel No.31 Lipstick / 高级材质渲染</h2>
+
+  <p class="desc">质感重构・奢雅光影 / Texture Reimagined · Luxury Elegance.</p>
+
   <video autoplay muted loop playsinline><source src="sp/3月29日.mp4"></video>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('c')">←</button>
+
     <img id="c" class="main-img" src="kouhong1/001d.jpg">
+
     <button class="next-btn" onclick="nextImg('c')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="kouhong1/001d.jpg" class="active" onclick="setImg('c',this,0)">
+
     <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
+
     <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
+
     <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
+
     <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
+
   </div>
+
 </div>
+
+
 
 <div class="product theme4">
-  <h2 style="text-align:center;">CT5 Automotive Visualization</h2>
-  <p class="desc">光影铸型 · 性能美学 / Light & Form · Performance Elegance</p>
+
+  <h2>CT5 Automotive Visualization</h2>
+
+  <p class="desc">光影铸型・性能美学 / Light & Form · Performance Elegance.</p>
+
   <video autoplay muted loop playsinline><source src="sp/3月29日(1).mp4"></video>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('d')">←</button>
+
     <img id="d" class="main-img" src="ct5光1.jpg">
+
     <button class="next-btn" onclick="nextImg('d')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="ct5.jpg" onclick="setImg('d',this,0)">
+
     <img src="ct5d.jpg" onclick="setImg('d',this,1)">
+
     <img src="ct5d侧.jpg" onclick="setImg('d',this,2)">
+
     <img src="ct5d侧正.jpg" onclick="setImg('d',this,3)">
+
     <img src="ct5光1.jpg" class="active" onclick="setImg('d',this,4)">
+
     <img src="ct5光2.jpg" onclick="setImg('d',this,5)">
+
     <img src="ct5正.jpg" onclick="setImg('d',this,6)">
+
     <img src="ct5轮.jpg" onclick="setImg('d',this,7)">
+
   </div>
+
 </div>
+
+
 
 <div class="product theme5">
-  <h2 style="text-align:center;">Diamond Ring | Jewelry Rendering</h2>
-  <p class="desc">光影成诗 · 璀璨永恒 / Light as Poetry · Sparkle Eternity</p>
+
+  <h2>Diamond Ring | Jewelry Photorealistic Rendering</h2>
+
+  <p class="desc">光影成诗・璀璨永恒 / ight as Poetry · Sparkle Eternity.</p>
+
   <video autoplay muted loop playsinline class="portrait-video"><source src="sp/3月29日(4).mp4"></video>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('e')">←</button>
+
     <img id="e" class="main-img" src="qita1/0202020d.jpg">
+
     <button class="next-btn" onclick="nextImg('e')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="qita1/0202020d.jpg" class="active" onclick="setImg('e',this,0)">
+
     <img src="qita1/zhubao1.jpg" onclick="setImg('e',this,1)">
+
   </div>
+
 </div>
+
+
 
 <div class="product theme6 no-video-layout">
+
   <div class="info-side">
-    <div style="border-left: 2px solid rgba(255,255,255,0.2); padding-left: 25px;">
-      <p style="opacity: 0.3; margin: 0; font-size: 11px; letter-spacing: 2px;">STILL LIFE</p>
-      <h2 style="font-size: 32px; margin: 10px 0; text-align: left;">Studio Renders</h2>
-      <p style="opacity:0.4; line-height:1.8; margin-top:15px; font-size: 14px;">探索不同材质在影棚灯光下的极致表现。</p>
+
+    <div style="border-left: 3px solid rgba(255,255,255,0.4); padding-left: 25px;">
+
+      <p style="opacity: 0.3; margin: 0; font-size: 13px; letter-spacing: 2px;">STILL LIFE</p>
+
+      <h2 style="font-size: 34px; margin: 10px 0; text-align: left;">Studio Renders</h2>
+
+      <p style="opacity:0.6; line-height:1.8; margin-top:15px;">探索不同材质在影棚灯光下的极致表现。</p>
+
     </div>
+
   </div>
+
   <div class="viewer-side">
+
     <div class="viewer">
+
       <button class="prev-btn" onclick="prevImg('f')">←</button>
+
       <img id="f" class="main-img" src="qita1/暗01.jpg" style="height: 450px;">
+
       <button class="next-btn" onclick="nextImg('f')">→</button>
+
     </div>
+
     <div class="thumbs">
+
       <img src="qita1/暗01.jpg" class="active" onclick="setImg('f',this,0)">
+
       <img src="qita1/暗2.1.jpg" onclick="setImg('f',this,1)">
+
       <img src="qita1/沐浴露.jpg" onclick="setImg('f',this,2)">
+
       <img src="qita1/苹果17.jpg" onclick="setImg('f',this,3)">
+
       <img src="qita1/相机01.jpg" onclick="setImg('f',this,4)">
+
       <img src="qita1/香水d.jpg" onclick="setImg('f',this,5)">
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div class="product theme7">
-  <h2 style="text-align:center;">NPR 风格化角色与场景合集</h2>
-  <p class="desc" style="text-align:center;">NPR 风格化 · 多元场景 / NPR Stylization · Diverse Scenes</p>
+
+  <h2>NPR 风格化角色与场景合集 | 非真实感渲染</h2>
+
+  <p class="desc">NPR 风格化・多元场景 / NPR Stylization · Diverse Scenes </p>
+
   <div class="viewer">
+
     <button class="prev-btn" onclick="prevImg('g')">←</button>
+
     <img id="g" class="main-img" src="qita1/2CI.jpg">
+
     <button class="next-btn" onclick="nextImg('g')">→</button>
+
   </div>
+
   <div class="thumbs">
+
     <img src="qita1/2CI.jpg" class="active" onclick="setImg('g',this,0)">
+
     <img src="qita1/国画2.0.jpg" onclick="setImg('g',this,1)">
+
     <img src="qita1/无标题.jpg" onclick="setImg('g',this,2)">
+
     <img src="qita1/电脑科幻场景.jpg" onclick="setImg('g',this,3)">
+
   </div>
+
 </div>
+
+
 
 <div class="about">
-  <p>VISUAL DESIGN / 3D ART / MOTION GRAPHICS</p>
-  <p style="margin-top: 10px;">© 2026 REIMAGINED STUDIO</p>
+
+  <h2>CONTACT ME</h2>
+
+  <p>Visual Design / 3D Art / Motion Graphics</p>
+
 </div>
 
+
+
 <script>
+
 const imgList = {
+
   a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
+
   b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
+
   c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"],
+
   d:["ct5.jpg","ct5d.jpg","ct5d侧.jpg","ct5d侧正.jpg","ct5光1.jpg","ct5光2.jpg","ct5正.jpg","ct5轮.jpg"],
+
   e:["qita1/0202020d.jpg","qita1/zhubao1.jpg"],
+
   f:["qita1/暗01.jpg","qita1/暗2.1.jpg","qita1/沐浴露.jpg","qita1/苹果17.jpg","qita1/相机01.jpg","qita1/香水d.jpg"],
+
   g:["qita1/2CI.jpg","qita1/国画2.0.jpg","qita1/无标题.jpg","qita1/电脑科幻场景.jpg"]
+
 };
+
+
 
 const indexMap = {a:0, b:0, c:0, d:4, e:0, f:0, g:0};
 
+
+
 function setImg(id, el, index){
+
   const mainImg = document.getElementById(id);
-  mainImg.style.opacity = '0.4';
-  setTimeout(() => {
-    mainImg.src = el.src;
-    mainImg.style.opacity = '1';
-  }, 150);
+
+  mainImg.src = el.src;
+
   indexMap[id] = index;
+
   const parent = el.parentElement;
+
   parent.querySelectorAll("img").forEach(i => i.classList.remove("active"));
+
   el.classList.add("active");
+
 }
+
+
 
 function nextImg(id){
+
   indexMap[id]++;
+
   if(indexMap[id] >= imgList[id].length) indexMap[id] = 0;
+
   updateViewerState(id);
+
 }
+
+
 
 function prevImg(id){
+
   indexMap[id]--;
+
   if(indexMap[id] < 0) indexMap[id] = imgList[id].length - 1;
+
   updateViewerState(id);
+
 }
+
+
 
 function updateViewerState(id){
+
   const newSrc = imgList[id][indexMap[id]];
+
   const mainImg = document.getElementById(id);
-  mainImg.style.opacity = '0.4';
-  setTimeout(() => {
-    mainImg.src = newSrc;
-    mainImg.style.opacity = '1';
-  }, 150);
+
+  mainImg.src = newSrc;
+
   const productDiv = mainImg.closest('.product');
+
   const thumbs = productDiv.querySelectorAll('.thumbs img');
+
   thumbs.forEach((img, i) => {
+
     if(i === indexMap[id]) img.classList.add('active');
+
     else img.classList.remove('active');
+
   });
+
 }
 
+
+
 const items = document.querySelectorAll('.product');
+
 const observer = new IntersectionObserver(entries => {
+
   entries.forEach(entry => {
+
     if(entry.isIntersecting) entry.target.classList.add('show');
+
   });
-}, { threshold: 0.1 });
+
+}, { threshold: 0.15 });
+
+
 
 items.forEach(item => observer.observe(item));
+
 </script>
 
+
+
 </body>
+
 </html>
