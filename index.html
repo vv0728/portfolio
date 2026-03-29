@@ -51,14 +51,33 @@ body{
   transform:translateY(0);
 }
 
-/* ===== themes ===== */
+/* ===== 主题 ===== */
 .theme1{background:#000;}
 .theme2{background:#fff;color:#111;}
 .theme3{background:linear-gradient(145deg,#151010,#241818);}
-.theme4{background: linear-gradient(145deg, #0b0b0f, #1a1a22);}
-.theme5{background: linear-gradient(145deg, #f7f7f7, #dcdcdc); color:#111;}
-.theme6{background:#111;}
-.theme7{background: linear-gradient(135deg, #120b1f, #1b1440);}
+  .theme4{
+  background: linear-gradient(145deg, #0b0b0f, #1a1a22);
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.theme5{
+  background: linear-gradient(145deg, #f7f7f7, #dcdcdc);
+  color:#111;
+}
+
+.theme5 .viewer button{
+  color:#111;
+  background:rgba(0,0,0,0.08);
+}
+
+.theme6{
+  background:#111;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.theme7{
+  background: linear-gradient(135deg, #120b1f, #1b1440);
+}
 
 /* ===== 标题 ===== */
 .product h2{
@@ -67,7 +86,7 @@ body{
   margin:0;
 }
 
-/* ===== viewer ===== */
+/* ===== 统一视觉（关键修复） ===== */
 .viewer{
   display:flex;
   align-items:center;
@@ -79,14 +98,20 @@ body{
   width:42px;
   height:42px;
   border-radius:12px;
+
   border:none;
   cursor:pointer;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:18px;
+
   background:rgba(120,120,120,0.25);
   color:#111;
+
+  backdrop-filter: blur(6px);
   transition:0.3s;
 }
 
@@ -95,16 +120,13 @@ body{
   background:rgba(120,120,120,0.4);
 }
 
-/* 黑色主题按钮反转 */
+/* 黑色主题自动反转 */
 .theme1 .viewer button,
-.theme3 .viewer button,
-.theme4 .viewer button,
-.theme6 .viewer button{
+.theme3 .viewer button{
   color:#fff;
   background:rgba(255,255,255,0.12);
 }
-
-/* 主图 */
+/* 主图（解决竖图爆炸） */
 .main-img{
   width:100%;
   max-width:800px;
@@ -114,7 +136,7 @@ body{
   background:#111;
 }
 
-/* thumbnails */
+/* ===== 缩略图 ===== */
 .thumbs{
   display:flex;
   justify-content:center;
@@ -138,29 +160,6 @@ body{
   border:2px solid #fff;
 }
 
-/* ===== 产品6：图片墙 ===== */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:12px;
-}
-
-.grid img{
-  width:100%;
-  border-radius:12px;
-  object-fit:cover;
-  transition:0.3s;
-}
-
-/* 适配竖图 / 横图混排 */
-.grid img:nth-child(3n+1){aspect-ratio:3/4;}
-.grid img:nth-child(3n+2){aspect-ratio:1/1;}
-.grid img:nth-child(3n){aspect-ratio:4/3;}
-
-.grid img:hover{
-  transform:scale(1.02);
-}
-
 /* ABOUT */
 .about{
   padding:140px 8%;
@@ -177,9 +176,13 @@ body{
   <p>Product / Motion / 3D</p>
 </div>
 
-<!-- ================= 1 ================= -->
+<!-- ================= 产品1 ================= -->
 <div class="product theme1">
-  <h2>Razer Huntsman V3 Pro</h2>
+  <h2>Razer Huntsman V3 Pro｜质感光影动画</h2>
+
+  <video autoplay muted loop playsinline>
+    <source src="sp/jianpan1.mp4">
+  </video>
 
   <div class="viewer">
     <button onclick="prevImg('a')">←</button>
@@ -195,9 +198,13 @@ body{
   </div>
 </div>
 
-<!-- ================= 2 ================= -->
+<!-- ================= 产品2 ================= -->
 <div class="product theme2">
-  <h2>PRODUCT B</h2>
+  <h2>PRODUCT B - CG Model</h2>
+
+  <video autoplay muted loop playsinline>
+    <source src="sp/3月29日(2).mp4">
+  </video>
 
   <div class="viewer">
     <button onclick="prevImg('b')">←</button>
@@ -213,9 +220,13 @@ body{
   </div>
 </div>
 
-<!-- ================= 3 ================= -->
+<!-- ================= 产品3 ================= -->
 <div class="product theme3">
-  <h2>PRODUCT C</h2>
+  <h2>PRODUCT C - Render Set</h2>
+
+  <video autoplay muted loop playsinline>
+    <source src="sp/3月29日.mp4">
+  </video>
 
   <div class="viewer">
     <button onclick="prevImg('c')">←</button>
@@ -228,55 +239,76 @@ body{
     <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
     <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
     <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
+    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
-
-<!-- ================= 4 FIX ================= -->
+  <!-- ================= 产品4 ================= -->
 <div class="product theme4">
-  <h2>PRODUCT D</h2>
+  <h2>PRODUCT C - Render Set</h2>
+
+  <video autoplay muted loop playsinline>
+    <source src="sp/3月29日(1).mp4">
+  </video>
 
   <div class="viewer">
-    <button onclick="prevImg('d')">←</button>
-    <img id="d" class="main-img" src="ct5光1.jpg">
-    <button onclick="nextImg('d')">→</button>
+    <button onclick="prevImg('c')">←</button>
+    <img id="c" class="main-img" src="ct5光1.jpg">
+    <button onclick="nextImg('c')">→</button>
   </div>
 
   <div class="thumbs">
-    <img src="ct5.jpg" onclick="setImg('d',this,0)">
-    <img src="ct5d.jpg" onclick="setImg('d',this,1)">
-    <img src="ct5d侧.jpg" onclick="setImg('d',this,2)">
-    <img src="ct5光1.jpg" onclick="setImg('d',this,3)">
+    <img src="ct5.jpg" onclick="setImg('c',this,0)">
+    <img src="ct5d.jpg" onclick="setImg('c',this,1)">
+    <img src="ct5d侧.jpg" onclick="setImg('c',this,2)">
+    <img src="ct5d侧正.jpg" onclick="setImg('c',this,3)">
+    <img src="ct5光1.jpg" onclick="setImg('c',this,4)">
+    <img src="ct5光2.jpg" onclick="setImg('c',this,4)">
+    <img src="ct5正.jpg" onclick="setImg('c',this,4)">
+    <img src="ct5轮.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
-
-<!-- ================= 5 FIX ================= -->
+  <!-- ================= 产品5 ================= -->
 <div class="product theme5">
-  <h2>PRODUCT E</h2>
+  <h2>PRODUCT C - Render Set</h2>
+
+  <video autoplay muted loop playsinline>
+    <source src="sp/3月29日.mp4">
+  </video>
 
   <div class="viewer">
-    <button onclick="prevImg('e')">←</button>
-    <img id="e" class="main-img" src="kouhong1/001d.jpg">
-    <button onclick="nextImg('e')">→</button>
+    <button onclick="prevImg('c')">←</button>
+    <img id="c" class="main-img" src="kouhong1/001d.jpg">
+    <button onclick="nextImg('c')">→</button>
   </div>
 
   <div class="thumbs">
-    <img src="kouhong1/001d.jpg" onclick="setImg('e',this,0)">
-    <img src="kouhong1/侧.jpg" onclick="setImg('e',this,1)">
-    <img src="kouhong1/顶.jpg" onclick="setImg('e',this,2)">
+    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
+    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
+    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
+    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
+    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
-
-<!-- ================= 6 NEW GRID ================= -->
+  <!-- ================= 产品6 ================= -->
 <div class="product theme6">
-  <h2>Render Collection</h2>
+  <h2>PRODUCT C - Render Set</h2>
 
-  <div class="grid">
-    <img src="mix/1.jpg">
-    <img src="mix/2.jpg">
-    <img src="mix/3.jpg">
-    <img src="mix/4.jpg">
-    <img src="mix/5.jpg">
-    <img src="mix/6.jpg">
+  <video autoplay muted loop playsinline>
+    <source src="sp/3月29日.mp4">
+  </video>
+
+  <div class="viewer">
+    <button onclick="prevImg('c')">←</button>
+    <img id="c" class="main-img" src="kouhong1/001d.jpg">
+    <button onclick="nextImg('c')">→</button>
+  </div>
+
+  <div class="thumbs">
+    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
+    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
+    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
+    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
+    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
 
@@ -289,19 +321,17 @@ body{
 const imgList = {
   a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
   b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
-  c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg"],
-
-  d:["ct5.jpg","ct5d.jpg","ct5d侧.jpg","ct5光1.jpg"],
-  e:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg"]
+  c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"]
 };
 
-const indexMap = {a:0,b:0,c:0,d:0,e:0};
+const indexMap = {a:0,b:0,c:0};
 
 function setImg(id,el,index){
   document.getElementById(id).src = el.src;
   indexMap[id]=index;
 
-  el.parentElement.querySelectorAll("img").forEach(i=>{
+  const parent = el.parentElement;
+  parent.querySelectorAll("img").forEach(i=>{
     i.classList.remove("active");
   });
   el.classList.add("active");
@@ -323,7 +353,7 @@ function update(id){
   document.getElementById(id).src = imgList[id][indexMap[id]];
 }
 
-/* scroll animation */
+/* scroll reveal */
 const items=document.querySelectorAll('.product');
 const observer=new IntersectionObserver(e=>{
   e.forEach(i=>{
