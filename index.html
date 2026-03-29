@@ -31,19 +31,16 @@ body{
   opacity:0.6;
 }
 
-/* ===== 产品模块基础 ===== */
+/* ===== 产品模块 ===== */
 .product{
   padding:120px 8%;
   border-radius:30px;
   margin:80px auto;
   width:85%;
-
   display:flex;
   flex-direction:column;
   gap:25px;
-
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-
   opacity:0;
   transform:translateY(40px);
   transition:0.8s;
@@ -54,42 +51,44 @@ body{
   transform:translateY(0);
 }
 
-/* ===== 不同产品主题色 ===== */
-.theme1{
-  background: #000; /* 纯黑 */
-}
-
-.theme2{
-  background: #fff; /* 纯白 */
-  color:#111;
-}
-
-.theme3{
-  background: linear-gradient(145deg, #151010, #241818);
-}
+/* ===== 主题 ===== */
+.theme1{background:#000;}
+.theme2{background:#fff;color:#111;}
+.theme3{background:linear-gradient(145deg,#151010,#241818);}
 
 /* ===== 标题 ===== */
 .product h2{
   font-size:26px;
   letter-spacing:2px;
   margin:0;
-  opacity:0.9;
 }
 
-/* ===== 视频（缩小嵌入） ===== */
-.product video{
-  width:60%;
-  border-radius:18px;
-  align-self:center;
-  opacity:0.95;
+/* ===== 统一视觉（关键修复） ===== */
+.viewer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
 }
 
-/* ===== 主图 ===== */
+.viewer button{
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:#fff;
+  font-size:20px;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* 主图（解决竖图爆炸） */
 .main-img{
-  width:75%;
-  max-width:900px;
+  width:100%;
+  max-width:800px;
+  height:500px;
+  object-fit:contain;
   border-radius:18px;
-  align-self:center;
+  background:#111;
 }
 
 /* ===== 缩略图 ===== */
@@ -110,35 +109,29 @@ body{
   transition:0.3s;
 }
 
-.thumbs img:hover{
+.thumbs img.active{
   opacity:1;
-  transform:scale(1.05);
+  transform:scale(1.15);
+  border:2px solid #fff;
 }
 
-/* 特殊白色主题缩略图文字颜色 */
-.theme2 .thumbs img{
-  border:2px solid #ddd;
-}
-
-/* About */
+/* ABOUT */
 .about{
   padding:140px 8%;
   text-align:center;
   opacity:0.6;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <h1>VISUAL PORTFOLIO</h1>
   <p>Product / Motion / 3D</p>
 </div>
 
-<!-- ===== 产品1 ===== -->
+<!-- ================= 产品1 ================= -->
 <div class="product theme1">
   <h2>Razer Huntsman V3 Pro｜质感光影动画</h2>
 
@@ -146,60 +139,104 @@ body{
     <source src="sp/jianpan1.mp4">
   </video>
 
-  <img id="a" class="main-img" src="jianpan1/22.jpg">
+  <div class="viewer">
+    <button onclick="prevImg('a')">←</button>
+    <img id="a" class="main-img" src="jianpan1/22.jpg">
+    <button onclick="nextImg('a')">→</button>
+  </div>
 
   <div class="thumbs">
-    <img src="jianpan1/22.jpg" onclick="changeImg('a',this)">
-    <img src="jianpan1/33.jpg" onclick="changeImg('a',this)">
-    <img src="jianpan1/正1.jpg" onclick="changeImg('a',this)">
-    <img src="jianpan1/特1.jpg" onclick="changeImg('a',this)">
+    <img src="jianpan1/22.jpg" onclick="setImg('a',this,0)">
+    <img src="jianpan1/33.jpg" onclick="setImg('a',this,1)">
+    <img src="jianpan1/正1.jpg" onclick="setImg('a',this,2)">
+    <img src="jianpan1/特1.jpg" onclick="setImg('a',this,3)">
   </div>
 </div>
 
-<!-- ===== 产品2 ===== -->
+<!-- ================= 产品2 ================= -->
 <div class="product theme2">
   <h2>PRODUCT B - CG Model</h2>
 
-   <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline>
     <source src="sp/3月29日(2).mp4">
   </video>
-  <img id="b" class="main-img" src="shouji1/0202.jpg">
+
+  <div class="viewer">
+    <button onclick="prevImg('b')">←</button>
+    <img id="b" class="main-img" src="shouji1/0202.jpg">
+    <button onclick="nextImg('b')">→</button>
+  </div>
 
   <div class="thumbs">
-    <img src="shouji1/0202.jpg" onclick="changeImg('b',this)">
-    <img src="shouji1/2-1.jpg" onclick="changeImg('b',this)">
-    <img src="shouji1/侧43.jpg" onclick="changeImg('b',this)">
-    <img src="shouji1/Untitled.jpg" onclick="changeImg('b',this)">
+    <img src="shouji1/0202.jpg" onclick="setImg('b',this,0)">
+    <img src="shouji1/2-1.jpg" onclick="setImg('b',this,1)">
+    <img src="shouji1/侧43.jpg" onclick="setImg('b',this,2)">
+    <img src="shouji1/Untitled.jpg" onclick="setImg('b',this,3)">
   </div>
 </div>
 
-<!-- ===== 产品3 ===== -->
+<!-- ================= 产品3 ================= -->
 <div class="product theme3">
   <h2>PRODUCT C - Render Set</h2>
-<video autoplay muted loop playsinline>
+
+  <video autoplay muted loop playsinline>
     <source src="sp/3月29日.mp4">
   </video>
-  <img id="c" class="main-img" src="kouhong1/001d.jpg">
+
+  <div class="viewer">
+    <button onclick="prevImg('c')">←</button>
+    <img id="c" class="main-img" src="kouhong1/001d.jpg">
+    <button onclick="nextImg('c')">→</button>
+  </div>
 
   <div class="thumbs">
-    <img src="kouhong1/001d.jpg" onclick="changeImg('c',this)">
-      <img src="kouhong1/侧.jpg" onclick="changeImg('c',this)">
-      <img src="kouhong1/顶.jpg" onclick="changeImg('c',this)">
-     <img src="kouhong1/顶1.jpg" onclick="changeImg('c',this)">
-      <img src="kouhong1/口红.jpg" onclick="changeImg('c',this)">
-
+    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
+    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
+    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
+    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
+    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
 
-<!-- ABOUT -->
 <div class="about">
   <h2>ABOUT</h2>
   <p>Visual Design / 3D / Motion</p>
 </div>
 
 <script>
-function changeImg(id,el){
+const imgList = {
+  a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
+  b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
+  c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"]
+};
+
+const indexMap = {a:0,b:0,c:0};
+
+function setImg(id,el,index){
   document.getElementById(id).src = el.src;
+  indexMap[id]=index;
+
+  const parent = el.parentElement;
+  parent.querySelectorAll("img").forEach(i=>{
+    i.classList.remove("active");
+  });
+  el.classList.add("active");
+}
+
+function nextImg(id){
+  indexMap[id]++;
+  if(indexMap[id]>=imgList[id].length) indexMap[id]=0;
+  update(id);
+}
+
+function prevImg(id){
+  indexMap[id]--;
+  if(indexMap[id]<0) indexMap[id]=imgList[id].length-1;
+  update(id);
+}
+
+function update(id){
+  document.getElementById(id).src = imgList[id][indexMap[id]];
 }
 
 /* scroll reveal */
