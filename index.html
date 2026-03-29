@@ -11,7 +11,36 @@ body{
   background:#0a0a0a;
   color:#fff;
 }
+/* ===== 产品 6 专用：无视频排版 (左右布局) ===== */
+.no-video-layout {
+  display: flex;
+  flex-direction: row !important; /* 改为横向 */
+  align-items: stretch;
+  gap: 40px;
+  padding: 60px 5%;
+}
 
+.no-video-layout .info-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.no-video-layout .viewer-side {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 适配手机端 */
+@media (max-width: 900px) {
+  .no-video-layout {
+    flex-direction: column !important;
+  }
+}
 /* ===== HERO ===== */
 .hero{
   height:90vh;
@@ -242,73 +271,65 @@ body{
     <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
   </div>
 </div>
-  <!-- ================= 产品4 ================= -->
 <div class="product theme4">
-  <h2>PRODUCT C - Render Set</h2>
-
-  <video autoplay muted loop playsinline>
-    <source src="sp/3月29日(1).mp4">
-  </video>
-
+  <h2>CT5 - Render Series</h2>
+  <video autoplay muted loop playsinline><source src="sp/3月29日(1).mp4"></video>
   <div class="viewer">
-    <button onclick="prevImg('c')">←</button>
-    <img id="c" class="main-img" src="ct5光1.jpg">
-    <button onclick="nextImg('c')">→</button>
+    <button onclick="prevImg('d')">←</button>
+    <img id="d" class="main-img" src="ct5光1.jpg">
+    <button onclick="nextImg('d')">→</button>
   </div>
-
   <div class="thumbs">
-    <img src="ct5.jpg" onclick="setImg('c',this,0)">
-    <img src="ct5d.jpg" onclick="setImg('c',this,1)">
-    <img src="ct5d侧.jpg" onclick="setImg('c',this,2)">
-    <img src="ct5d侧正.jpg" onclick="setImg('c',this,3)">
-    <img src="ct5光1.jpg" onclick="setImg('c',this,4)">
-    <img src="ct5光2.jpg" onclick="setImg('c',this,4)">
-    <img src="ct5正.jpg" onclick="setImg('c',this,4)">
-    <img src="ct5轮.jpg" onclick="setImg('c',this,4)">
+    <img src="ct5.jpg" onclick="setImg('d',this,0)">
+    <img src="ct5d.jpg" onclick="setImg('d',this,1)">
+    <img src="ct5d侧.jpg" onclick="setImg('d',this,2)">
+    <img src="ct5d侧正.jpg" onclick="setImg('d',this,3)">
+    <img src="ct5光1.jpg" onclick="setImg('d',this,4)">
+    <img src="ct5光2.jpg" onclick="setImg('d',this,5)">
+    <img src="ct5正.jpg" onclick="setImg('d',this,6)">
+    <img src="ct5轮.jpg" onclick="setImg('d',this,7)">
   </div>
 </div>
-  <!-- ================= 产品5 ================= -->
+
 <div class="product theme5">
-  <h2>PRODUCT C - Render Set</h2>
-
-  <video autoplay muted loop playsinline>
-    <source src="sp/3月29日.mp4">
-  </video>
-
+  <h2>PRODUCT E - Cosmetic Set</h2>
+  <video autoplay muted loop playsinline><source src="sp/3月29日.mp4"></video>
   <div class="viewer">
-    <button onclick="prevImg('c')">←</button>
-    <img id="c" class="main-img" src="kouhong1/001d.jpg">
-    <button onclick="nextImg('c')">→</button>
+    <button onclick="prevImg('e')">←</button>
+    <img id="e" class="main-img" src="kouhong1/001d.jpg">
+    <button onclick="nextImg('e')">→</button>
   </div>
-
   <div class="thumbs">
-    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
-    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
-    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
-    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
-    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
+    <img src="kouhong1/001d.jpg" onclick="setImg('e',this,0)">
+    <img src="kouhong1/侧.jpg" onclick="setImg('e',this,1)">
+    <img src="kouhong1/顶.jpg" onclick="setImg('e',this,2)">
+    <img src="kouhong1/顶1.jpg" onclick="setImg('e',this,3)">
+    <img src="kouhong1/口红.jpg" onclick="setImg('e',this,4)">
   </div>
 </div>
-  <!-- ================= 产品6 ================= -->
-<div class="product theme6">
-  <h2>PRODUCT C - Render Set</h2>
 
-  <video autoplay muted loop playsinline>
-    <source src="sp/3月29日.mp4">
-  </video>
-
-  <div class="viewer">
-    <button onclick="prevImg('c')">←</button>
-    <img id="c" class="main-img" src="kouhong1/001d.jpg">
-    <button onclick="nextImg('c')">→</button>
+<div class="product theme6 no-video-layout">
+  <div class="info-side">
+    <div style="border-left: 4px solid #fff; padding-left: 20px;">
+      <p style="opacity: 0.5; margin: 0;">GALLERY</p>
+      <h2 style="font-size: 32px; margin: 10px 0;">PRODUCT F</h2>
+      <p>这里是纯图片展示区域，采用了左右对分的排版，适合展示静态渲染图组。</p>
+    </div>
   </div>
 
-  <div class="thumbs">
-    <img src="kouhong1/001d.jpg" onclick="setImg('c',this,0)">
-    <img src="kouhong1/侧.jpg" onclick="setImg('c',this,1)">
-    <img src="kouhong1/顶.jpg" onclick="setImg('c',this,2)">
-    <img src="kouhong1/顶1.jpg" onclick="setImg('c',this,3)">
-    <img src="kouhong1/口红.jpg" onclick="setImg('c',this,4)">
+  <div class="viewer-side">
+    <div class="viewer">
+      <button onclick="prevImg('f')">←</button>
+      <img id="f" class="main-img" src="kouhong1/001d.jpg" style="height: 400px;">
+      <button onclick="nextImg('f')">→</button>
+    </div>
+    <div class="thumbs">
+      <img src="kouhong1/001d.jpg" onclick="setImg('f',this,0)">
+      <img src="kouhong1/侧.jpg" onclick="setImg('f',this,1)">
+      <img src="kouhong1/顶.jpg" onclick="setImg('f',this,2)">
+      <img src="kouhong1/顶1.jpg" onclick="setImg('f',this,3)">
+      <img src="kouhong1/口红.jpg" onclick="setImg('f',this,4)">
+    </div>
   </div>
 </div>
 
@@ -321,47 +342,59 @@ body{
 const imgList = {
   a:["jianpan1/22.jpg","jianpan1/33.jpg","jianpan1/正1.jpg","jianpan1/特1.jpg"],
   b:["shouji1/0202.jpg","shouji1/2-1.jpg","shouji1/侧43.jpg","shouji1/Untitled.jpg"],
-  c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"]
+  c:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"],
+  d:["ct5.jpg","ct5d.jpg","ct5d侧.jpg","ct5d侧正.jpg","ct5光1.jpg","ct5光2.jpg","ct5正.jpg","ct5轮.jpg"],
+  e:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"],
+  f:["kouhong1/001d.jpg","kouhong1/侧.jpg","kouhong1/顶.jpg","kouhong1/顶1.jpg","kouhong1/口红.jpg"]
 };
 
-const indexMap = {a:0,b:0,c:0};
+// 2. 初始化所有产品的索引计数器
+const indexMap = {a:0, b:0, c:0, d:0, e:0, f:0};
 
-function setImg(id,el,index){
+function setImg(id, el, index){
   document.getElementById(id).src = el.src;
-  indexMap[id]=index;
+  indexMap[id] = index;
 
+  // 激活缩略图状态
   const parent = el.parentElement;
-  parent.querySelectorAll("img").forEach(i=>{
-    i.classList.remove("active");
-  });
+  parent.querySelectorAll("img").forEach(i => i.classList.remove("active"));
   el.classList.add("active");
 }
 
 function nextImg(id){
   indexMap[id]++;
-  if(indexMap[id]>=imgList[id].length) indexMap[id]=0;
+  if(indexMap[id] >= imgList[id].length) indexMap[id] = 0;
   update(id);
 }
 
 function prevImg(id){
   indexMap[id]--;
-  if(indexMap[id]<0) indexMap[id]=imgList[id].length-1;
+  if(indexMap[id] < 0) indexMap[id] = imgList[id].length - 1;
   update(id);
 }
 
 function update(id){
-  document.getElementById(id).src = imgList[id][indexMap[id]];
+  const newSrc = imgList[id][indexMap[id]];
+  document.getElementById(id).src = newSrc;
+  
+  // 同步缩略图的 active 状态
+  const productDiv = document.getElementById(id).closest('.product');
+  const thumbs = productDiv.querySelectorAll('.thumbs img');
+  thumbs.forEach((img, i) => {
+    if(i === indexMap[id]) img.classList.add('active');
+    else img.classList.remove('active');
+  });
 }
 
-/* scroll reveal */
-const items=document.querySelectorAll('.product');
-const observer=new IntersectionObserver(e=>{
-  e.forEach(i=>{
-    if(i.isIntersecting)i.target.classList.add('show');
+/* 滚动显示动画 */
+const items = document.querySelectorAll('.product');
+const observer = new IntersectionObserver(e => {
+  e.forEach(i => {
+    if(i.isIntersecting) i.target.classList.add('show');
   });
-},{threshold:0.2});
+}, {threshold: 0.1});
 
-items.forEach(i=>observer.observe(i));
+items.forEach(i => observer.observe(i));
 </script>
 
 </body>
