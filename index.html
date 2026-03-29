@@ -72,15 +72,37 @@ body{
 }
 
 .viewer button{
-  background:rgba(255,255,255,0.1);
+  width:42px;
+  height:42px;
+  border-radius:12px;
+
   border:none;
-  color:#fff;
-  font-size:20px;
-  padding:10px 15px;
-  border-radius:10px;
   cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:18px;
+
+  background:rgba(120,120,120,0.25);
+  color:#111;
+
+  backdrop-filter: blur(6px);
+  transition:0.3s;
 }
 
+.viewer button:hover{
+  transform:scale(1.05);
+  background:rgba(120,120,120,0.4);
+}
+
+/* 黑色主题自动反转 */
+.theme1 .viewer button,
+.theme3 .viewer button{
+  color:#fff;
+  background:rgba(255,255,255,0.12);
+}
 /* 主图（解决竖图爆炸） */
 .main-img{
   width:100%;
