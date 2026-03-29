@@ -12,7 +12,7 @@ body{
   color:#fff;
 }
 
-/* ===== HERO ===== */
+/* ===== HERO（不动） ===== */
 .hero{
   height:90vh;
   display:flex;
@@ -25,7 +25,7 @@ body{
 .hero h1{font-size:52px;letter-spacing:4px;}
 .hero p{opacity:0.6;}
 
-/* ===== PRODUCT ===== */
+/* ===== PRODUCT（不动） ===== */
 .product{
   padding:120px 8%;
   border-radius:30px;
@@ -45,46 +45,47 @@ body{
   transform:translateY(0);
 }
 
-/* ===== THEMES ===== */
+/* ===== theme1-3（完全不动） ===== */
 .theme1{background:#000;}
 .theme2{background:#fff;color:#111;}
 .theme3{background:linear-gradient(145deg,#151010,#241818);}
 
-/* 🚗 CT5 */
+/* ===== ✨ theme4 CT5 ===== */
 .theme4{
   background:linear-gradient(145deg,#0b0b0f,#1a1a22);
+  border:1px solid rgba(255,255,255,0.05);
 }
 
-/* 💍 ring */
+/* ===== 💍 theme5 钻戒 ===== */
 .theme5{
   background:linear-gradient(145deg,#f7f7f7,#dcdcdc);
   color:#111;
 }
 
-/* fix button in white bg */
+/* 白色背景按钮修复 */
 .theme5 .viewer button{
   background:rgba(0,0,0,0.08);
   color:#111;
 }
 
-/* 📦 gallery */
+/* ===== 📦 theme6 画廊 ===== */
 .theme6{
   background:#111;
 }
 
-/* 🎨 scene */
+/* ===== 🎨 theme7 场景 ===== */
 .theme7{
   background:linear-gradient(135deg,#120b1f,#1b1440);
 }
 
-/* ===== TITLE ===== */
+/* ===== title ===== */
 .product h2{
   font-size:26px;
   letter-spacing:2px;
   margin:0;
 }
 
-/* ===== VIEWER ===== */
+/* ===== viewer ===== */
 .viewer{
   display:flex;
   align-items:center;
@@ -93,10 +94,15 @@ body{
 }
 
 .viewer button{
-  width:42px;height:42px;
+  width:42px;
+  height:42px;
   border-radius:12px;
   border:none;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
   background:rgba(120,120,120,0.25);
   color:#111;
   backdrop-filter:blur(6px);
@@ -108,7 +114,7 @@ body{
   background:rgba(120,120,120,0.4);
 }
 
-/* dark themes */
+/* dark themes button */
 .theme1 .viewer button,
 .theme3 .viewer button,
 .theme4 .viewer button,
@@ -117,7 +123,7 @@ body{
   background:rgba(255,255,255,0.12);
 }
 
-/* image */
+/* ===== main image ===== */
 .main-img{
   width:100%;
   max-width:800px;
@@ -127,7 +133,7 @@ body{
   background:#111;
 }
 
-/* thumbs */
+/* ===== thumbs ===== */
 .thumbs{
   display:flex;
   justify-content:center;
@@ -151,7 +157,7 @@ body{
   border:2px solid #fff;
 }
 
-/* ===== gallery ===== */
+/* ===== 📦 gallery（theme6核心） ===== */
 .gallery{
   column-count:2;
   column-gap:15px;
@@ -169,7 +175,7 @@ body{
   transform:scale(1.02);
 }
 
-/* ===== ABOUT ===== */
+/* ===== about ===== */
 .about{
   padding:140px 8%;
   text-align:center;
@@ -180,27 +186,28 @@ body{
 
 <body>
 
+<!-- 不动 -->
 <div class="hero">
   <h1>VISUAL PORTFOLIO</h1>
   <p>Product / Motion / 3D</p>
 </div>
 
-<!-- ===== A ===== -->
+<!-- 不动 theme1 -->
 <div class="product theme1">
-  <h2>Keyboard Animation</h2>
+  <h2>Razer Huntsman V3 Pro｜质感光影动画</h2>
 </div>
 
-<!-- ===== B ===== -->
+<!-- 不动 theme2 -->
 <div class="product theme2">
-  <h2>Mobile CG</h2>
+  <h2>PRODUCT B - CG Model</h2>
 </div>
 
-<!-- ===== C ===== -->
+<!-- 不动 theme3 -->
 <div class="product theme3">
-  <h2>Render Set</h2>
+  <h2>PRODUCT C - Render Set</h2>
 </div>
 
-<!-- ===== D CT5 ===== -->
+<!-- 🚗 theme4 -->
 <div class="product theme4">
   <h2>Cadillac CT5</h2>
 
@@ -217,7 +224,7 @@ body{
   </div>
 </div>
 
-<!-- ===== E RING ===== -->
+<!-- 💍 theme5 -->
 <div class="product theme5">
   <h2>Diamond Ring</h2>
 
@@ -234,7 +241,7 @@ body{
   </div>
 </div>
 
-<!-- ===== F GALLERY ===== -->
+<!-- 📦 theme6（无视频+画廊） -->
 <div class="product theme6">
   <h2>Render Collection</h2>
 
@@ -248,7 +255,7 @@ body{
   </div>
 </div>
 
-<!-- ===== G SCENE ===== -->
+<!-- 🎨 theme7 -->
 <div class="product theme7">
   <h2>Atmospheric Scene</h2>
 
@@ -308,7 +315,5 @@ const ob=new IntersectionObserver(e=>{
 items.forEach(i=>ob.observe(i));
 </script>
 
-</body>
-</html>
 </body>
 </html>
